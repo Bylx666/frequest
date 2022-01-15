@@ -10,7 +10,7 @@ const server = http.createServer((sreq,sres)=>{
   let reqOptions = {
     method: "GET",
     hostname: "api-takumi.mihoyo.com",
-    port: "443",
+
     path: "/game_record/card/wapi/getGameRecordCard",
     headers: {
       'Content-Type': 'application/json'
