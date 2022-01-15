@@ -8,7 +8,7 @@ const err = (e)=> JSON.stringify({err : `${e}`})
  * 
  * 'I' prefix means Inputted
  * @param {String} Iurl requests valid link including "http://" or "https://"
- * @param {JSON} Ioptions 
+ * @param {Object} Ioptions 
  * write only `{}` to make these all default value.
 
   {
@@ -27,10 +27,10 @@ const err = (e)=> JSON.stringify({err : `${e}`})
 
   e = { body : `requested raw` , response : `http.incomingMessage`}
 */
-const frequest = (Iurl,
+function frequest (Iurl,
                   Ioptions,
                   callback = function (e) { return e }
-                  ) => {
+                  ) {
   let url
   try{
     url = new URL(Iurl)

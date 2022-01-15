@@ -15,9 +15,7 @@ const app = http.createServer((Req,Res)=>{
 
   const getParam = (param) => QSs.searchParams.get(param)
 
-  Res.write(frequest('http://nodejs.cn/api/http.html#httprequesturl-options-callback'))
-  
-  Res.end()
+  frequest('http://nodejs.cn/api/http.html#httprequesturl-options-callback')
 
 }).listen(port)
 
