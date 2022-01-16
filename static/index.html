@@ -61,7 +61,7 @@
     <tr><td>}</td><td colspan="2">%7D</td></tr>
     <tr><td>~</td><td colspan="2">%7E</td></tr>
   </table>
-  <div id="viewFullURL"><code id="viewCode">2333</code><span id="viewX">[x]</span></div>
+  <div id="viewFullURL"><code id="viewCode"></code><span id="viewX">[x]</span></div>
 </body>
 <script>
   const $ = (el) => document.getElementById(el)
@@ -210,6 +210,7 @@
     border-radius: 5px;
   }
   #viewFullURL{
+    display: none;
     z-index: 3;
     position: fixed;
     top: 0;
