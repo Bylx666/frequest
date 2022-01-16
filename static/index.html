@@ -3,8 +3,251 @@
 <head>
   <title>Frequest</title>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
 <body>
-  <code>https://freq.ller.cf/</code>url=
+  <div id="result"><code id="resultCode">https://freq.ller.cf/?url=</code><span id="resultCopy">Copy</span></div>
+  <div id="inputPlace">
+    <label>url<div style="color: rgba(233,81,147,0.7);display: inline;">*</div></label>:'<input type="text" id="url" placeholder="required">'</br>
+    <label>method</label>:'<input type="text" id="method" placeholder="`get` as default">'</br>
+    <label>body</label>:'<textarea type="text" id="body"></textarea>'</br>
+    <label>headers</label>:{<textarea type="text" id="headers"></textarea>}</br>
+    <label>advanced</label>:{<textarea type="text" id="advanced"></textarea>}</br>
+  </div>
+  <table id="urlEncodingTable">
+    <colgroup>
+      <col span="1" style="width: 100px;">
+      <col span="2" style="width: 300px;">
+    </colgroup>
+    <caption>Important URL Codes</caption>
+    <tr><th>char</th><th>first</th><th>secondary</th></tr>
+    <tr><td>&nbsp;</td><td>+</td><td>%20</td></tr>
+    <tr><td>!</td><td colspan="2">%21</td></tr>
+    <tr><td>&quot;</td><td colspan="2">%22</td></tr>
+    <tr><td>#</td><td colspan="2">%23</td></tr>
+    <tr><td>$</td><td colspan="2">%24</td></tr>
+    <tr><td>%</td><td colspan="2">%25</td></tr>
+    <tr><td>&amp;</td><td colspan="2">%26</td></tr>
+    <tr><td>'</td><td colspan="2">%27</td></tr>
+    <tr><td>(</td><td colspan="2">%28</td></tr>
+    <tr><td>)</td><td colspan="2">%29</td></tr>
+    <tr><td>*</td><td colspan="2">%2A</td></tr>
+    <tr><td>+</td><td colspan="2">%2B</td></tr>
+    <tr><td>,</td><td colspan="2">%2C</td></tr>
+    <tr><td>-</td><td colspan="2">%2D</td></tr>
+    <tr><td>.</td><td colspan="2">%2E</td></tr>
+    <tr><td>/</td><td colspan="2">%2F</td></tr>
+    <tr><td>0</td><td colspan="2">%30</td></tr>
+    <tr><td>9</td><td colspan="2">%39</td></tr>
+    <tr><td>:</td><td colspan="2">%3A</td></tr>
+    <tr><td>;</td><td colspan="2">%3B</td></tr>
+    <tr><td>&lt;</td><td colspan="2">%3C</td></tr>
+    <tr><td>=</td><td colspan="2">%3D</td></tr>
+    <tr><td>&gt;</td><td colspan="2">%3E</td></tr>
+    <tr><td>?</td><td colspan="2">%3F</td></tr>
+    <tr><td>@</td><td colspan="2">%40</td></tr>
+    <tr><td>A</td><td colspan="2">%41</td></tr>
+    <tr><td>Z</td><td colspan="2">%5A</td></tr>
+    <tr><td>[</td><td colspan="2">%5B</td></tr>
+    <tr><td>\</td><td colspan="2">%5C</td></tr>
+    <tr><td>]</td><td colspan="2">%5D</td></tr>
+    <tr><td>^</td><td colspan="2">%5E</td></tr>
+    <tr><td>_</td><td colspan="2">%5F</td></tr>
+    <tr><td>`</td><td colspan="2">%60</td></tr>
+    <tr><td>a</td><td colspan="2">%61</td></tr>
+    <tr><td>z</td><td colspan="2">%7A</td></tr>
+    <tr><td>{</td><td colspan="2">%7B</td></tr>
+    <tr><td>|</td><td colspan="2">%7C</td></tr>
+    <tr><td>}</td><td colspan="2">%7D</td></tr>
+    <tr><td>~</td><td colspan="2">%7E</td></tr>
+  </table>
+  <div id="viewFullURL"><code id="viewCode">2333</code><span id="viewX">[x]</span></div>
 </body>
+<script>
+  const $ = (el) => document.getElementById(el)
+  $('viewX').onclick = ()=>{
+    $('viewFullURL').style.display = 'none'
+  }
+  $('resultCode').onclick = ()=>{
+    $('viewCode').innerHTML = $('resultCode').innerHTML
+    $('viewFullURL').style.display = 'initial'
+  }
+  
+  $('resultCopy').onclick = ()=>{
+    let input = document.createElement('input')
+    input.value = $('resultCode').innerHTML.replace(/\&amp;/g,'\&')
+    document.body.appendChild(input)
+    input.select()
+    document.execCommand('copy')
+    input.setSelectionRange(0, 0)
+    input.remove()
+    return notice('Copied!')
+  }
+
+  const refreshUrl = ()=>{
+    let url = encodeURIComponent($('url').value)
+    let method = encodeURIComponent($('method').value) || null
+    let body = encodeURIComponent($('body').value) || null
+    let headers = encodeURIComponent($('headers').value) || null
+    let advanced = encodeURIComponent($('advanced').value) || null
+
+    let result = `https://freq.ller.cf/?url=${url}`
+    if(method!==null) result += `&method=${method}`
+    if(body!==null) result += `&body=${body}`
+    if(headers!==null) result += `&headers=%7B${headers}%7D`
+    if(advanced!==null) result += `&advanced=%7B${advanced}%7D`
+
+    $('resultCode').innerHTML = result
+  }
+  $('url').oninput=$('method').oninput=$('body').oninput=$('headers').oninput=$('advanced').oninput=refreshUrl
+
+  const notice = (msg)=>{
+    let el = document.createElement('div')
+    el.className = 'notice'
+    el.innerHTML = msg
+    document.body.appendChild(el)
+    setTimeout(()=>{el.remove()},3000)
+  }
+</script>
+<style>
+  #result{
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: calc(100% - 400px);
+    height: 75px;
+    background-color: rgba(233, 81, 147, 0.7);
+    border-radius: 5px;
+  }
+  #result code{
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  #result span{
+    z-index: 2;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  span{
+    background-color: rgba(255, 255, 255,0.7);
+    border-radius: 3px;
+    padding: 2px;
+  }
+  span:hover{
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+  }
+  span:active{
+    background-color: rgba(0,0,0,0.3);
+  }
+  code{
+    font-size: 15px;
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+    padding: 3px;
+    border-radius: 3px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  #inputPlace{
+    position: absolute;
+    left: 0;
+    top: 75px;
+    width: 100%;
+    height: calc(100% - 75px);
+    background:rgba(0, 0, 0, 0.1);
+  }
+
+  table{
+    border-collapse: collapse;
+    /* border-spacing: 1px; */
+    padding: 0;
+    position: fixed;
+    height: 100%;
+    width: 400px;
+    right: 0;
+    top: 0;
+    overflow-y: scroll;
+    display: block;
+  }
+  caption{
+    font-size: 25px;
+  }
+  th{
+    font-size: 24px;
+    color: white;
+    text-shadow: 1px 1px 3px white;
+    border: 1px solid white;
+    background-image: linear-gradient(to bottom,rgba(0,0,0,0.3),rgba(0,0,0,0.7));
+  }
+  td{
+    font-size: 20px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  table tr:nth-child(2n-1){
+    background-color: rgba(0,0,0,0.1);
+  }
+  table tr:nth-child(2n){
+    background-color: rgba(233, 81, 147, 0.7);
+  }
+
+  .notice{
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+    font-size: 18px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 3px solid rgba(0, 0, 0, 1);
+    border-radius: 5px;
+  }
+  #viewFullURL{
+    z-index: 3;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+  #viewCode{
+    font-size: 32px;
+  }
+  #viewX{
+    z-index: 4;
+    font-size: 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  @media screen and (max-width: 720px) {
+    table{
+      width: 100%;
+      height: 400px;
+      bottom: 0;
+      top: unset;
+      border: 1px solid rgba(233, 81, 147, 0.7);
+    }
+    #result{
+      width: 100%;
+    }
+    #resultCopy{
+      width: 56px;
+      height: 56px;
+      text-align: center;
+    }
+    #resultCopy:active{
+      background: rgba(0, 0, 0, 0.7);
+    }
+  }
+</style>
 </html>

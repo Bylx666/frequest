@@ -16,7 +16,7 @@ const app = http.createServer((Req,Res)=>{
    * @param {string} fileMine for example `application/json`
    */
   const getStaticFile = (relativePath,fileMine) => {
-    fs.readFile(path.resolve(__dirname,relativePath),(err,data)=>{
+    fs.readFile(path.join(__dirname,relativePath),(err,data)=>{
       if(err) {
         Res.writeHead(404,{'content-type': 'text/plain'})
         Res.write(err.message)
