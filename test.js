@@ -1,39 +1,21 @@
 var http = require('http');
-var frequest = require('frequest')
-frequest(e)
+var frequest = require('./frequest')
 
 var port = process.env.PORT || 8088;
-const server = http.createServer((sreq,sres)=>{
-  sres.writeHead(200, {
-    'content-type':'application/json'
+const server = http.createServer((Req,Res)=>{
+  Res.writeHead(200, {
+    'Access-Control-Allow-Origin': '*',
+    'content-type':'image/jpeg'
   })
 
-  var resBody
-  let reqOptions = {
-    method: "GET",
-    hostname: "api-takumi.mihoyo.com",
+  frequest('https://ller.cf/imgs/cover/bokuraIma.jpg',{},(e)=>{
+    Res.write(e.body)
+  },()=>{
+    Res.end()
+  })
 
-    path: "/game_record/card/wapi/getGameRecordCard",
-    headers: {
-      'Content-Type': 'application/json'
-      // ...HEADERS,
-      // 'DS': getDS()
-    }
-  }
-  let req = require('https').request(reqOptions,(res)=>{
-    res.setEncoding('utf8');
-    console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
-    res.on('data',(reqChunk)=>{
-      resBody=reqChunk
-      console.log(reqChunk)
-      sres.write(resBody)
-      sres.end()
-    })
-  });
-  req.end();
-
-  sres.on('error',(e)=>{
-    console.error("233"+e)
+  Res.on('error',(e)=>{
+    console.error(e)
   })
 }
 ).listen(port);

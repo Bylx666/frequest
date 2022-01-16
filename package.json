@@ -1,7 +1,4 @@
 {
-  "dependencies": {
-    "frequest": "^1.0.0"
-  },
   "name": "frequest",
   "version": "1.0.1",
   "description": "An easy to use http requester. procedure oriented by using callback function. **based on `http.request`**",
@@ -11,7 +8,8 @@
     "./server": "./index.js"
   },
   "scripts": {
-    "test": "node frequest.js"
+    "test": "node test.js",
+    "server": "node index.js"
   },
   "repository": {
     "type": "git",
