@@ -1,7 +1,7 @@
 {
   "version": 2,
   "functions": {
-    "index.js": {
+    "./index.js": {
       "runtime": "node@16.8.0",
       "includeFiles": "public/*" 
     }
