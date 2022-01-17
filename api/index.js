@@ -21,7 +21,6 @@ const app = http.createServer((Req,Res)=>{
     advanced: getParam('advanced') || {}
   }
 
-  let statusCode
   frequest(
     req.url,
     {
@@ -30,10 +29,10 @@ const app = http.createServer((Req,Res)=>{
       headers: req.headers, 
       advanced: req.advanced
     },
-    (e)=>{ statusCode=e.statusCode; Res.write(e.body) },
-    ()=>{ Res.writeHead(statusCode, {
+    (e)=>{ Res.writeHead(parseInt(e.statusCode),{
       'allow-control-access-origin': '*'
-    }); Res.end() }
+    }); Res.write(e.body) },
+    ()=>{ Res.end() }
   )
 
 }).listen(port)
