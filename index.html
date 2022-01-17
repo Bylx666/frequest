@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
 <body>
-  <div id="result"><code id="resultCode">https://freq.ller.cf/?url=</code><span id="resultCopy">Copy</span></div>
+  <div id="result"><code id="resultCode">https://freq.ller.cf/api?url=</code><span id="resultCopy">Copy</span></div>
   <div id="inputPlace">
     <label>url<div style="color: rgba(233,81,147,0.7);display: inline;">*</div></label>:'<input type="text" id="url" placeholder="required">'</br>
     <label>method</label>:'<input type="text" id="method" placeholder="`get` as default">'</br>
@@ -91,7 +91,7 @@
     let headers = encodeURIComponent($('headers').value) || null
     let advanced = encodeURIComponent($('advanced').value) || null
 
-    let result = `https://freq.ller.cf/?url=${url}`
+    let result = `https://freq.ller.cf/api?url=${url}`
     if(method!==null) result += `&method=${method}`
     if(body!==null) result += `&body=${body}`
     if(headers!==null) result += `&headers=%7B${headers}%7D`

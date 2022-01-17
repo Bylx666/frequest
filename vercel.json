@@ -1,15 +1,15 @@
 {
   "version": 2,
   "functions": {
-    "index.js": {
+    "api/index.js": {
       "runtime": "node@16.8.0",
       "includeFiles": "*" 
     }
   },
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/"
+      "source": "/api(.*)",
+      "destination": "/api"
     }
   ]
 }
