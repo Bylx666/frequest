@@ -7,14 +7,10 @@ const server = http.createServer((Req,Res)=>{
     'Access-Control-Allow-Origin': '*',
   })
 
-  frequest('https://ller.cf/imgs/cover/bokuraIma.jpg',{},(e)=>{
+  frequest('https%3A%2F%2Fller.cf%2Fimgs%2Fcover%2FthankYouFriend.jpg',{},(e)=>{
     Res.write(e.body)
   },()=>{
     Res.end()
-  })
-
-  Res.on('error',(e)=>{
-    console.error(e)
   })
 }
 ).listen(port);

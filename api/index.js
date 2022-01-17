@@ -21,6 +21,7 @@ const app = http.createServer((Req,Res)=>{
     advanced: getParam('advanced') || {}
   }
 
+  let one = 0
   frequest(
     req.url,
     {
@@ -29,9 +30,14 @@ const app = http.createServer((Req,Res)=>{
       headers: req.headers, 
       advanced: req.advanced
     },
-    (e)=>{ Res.writeHead(parseInt(e.statusCode),{
-      'allow-control-access-origin': '*'
-    }); Res.write(e.body) },
+    (e)=>{ 
+      if(one==0) {
+        Res.writeHead(parseInt(e.statusCode),{
+          'allow-control-access-origin': '*'
+        })
+        one++
+      }
+      Res.write(e.body) },
     ()=>{ Res.end() }
   )
 

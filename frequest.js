@@ -52,7 +52,7 @@ function frequest (
 
   let url
   try{
-    url = new URL(Iurl)
+    url = new URL(decodeURIComponent(Iurl))
   } catch(e){
     return err(e)
   }
@@ -80,9 +80,6 @@ function frequest (
     if(url.protocol == 'https:') using = https
     else using = http
     let aReq = using.request(ReqOptions,(Resp)=>{
-      Resp.on('error',(e)=>{
-        return err(e)
-      })
       Resp.on('data',(chunk)=>{
         let e = {
           body : chunk,
