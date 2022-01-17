@@ -16,18 +16,18 @@ const app = http.createServer((Req,Res)=>{
    * @param {string} fileMine for example `application/json`
    */
   const getStaticFile = (relativePath,fileMine) => {
-    fs.readFileSync(path.resolve(__dirname,relativePath),(err,data)=>{
-      if(err) {
-        Res.writeHead(404,{'content-type': 'text/plain'})
-        Res.write(err.message)
-        Res.end()
-      }
-      else {
-        Res.writeHead(200,{'content-type': fileMine})
-        Res.write(data)
-        Res.end()
-      }
-    })
+    let file
+    try {
+      file = fs.readFileSync(path.resolve(__dirname,relativePath))
+    } catch (err) {
+      Res.writeHead(404,{'content-type': 'text/plain'})
+      Res.write(err.message)
+      Res.end()
+      return false;
+    }
+    Res.writeHead(200,{'content-type': fileMine})
+    Res.write(file)
+    Res.end()
   }
 
   if(Req.url=='/favicon.ico') {
