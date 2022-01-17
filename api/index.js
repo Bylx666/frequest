@@ -1,5 +1,5 @@
 const http = require('http')
-const frequest = require('./frequest')
+const frequest = require('../frequest')
 const fs = require('fs')
 const path = require('path')
 
@@ -29,14 +29,14 @@ const app = http.createServer((Req,Res)=>{
   }
 
   if(Req.url=='/favicon.ico') {
-    getStaticFile('public/favicon.png','image/png')
+    getStaticFile('../favicon.png','image/png')
     return
   }
 
   let url = new URL(Req.url,`http://${Req.headers.host}`)
   console.log(url.pathname+url.search)
   if(url.pathname+url.search=='/') {
-    getStaticFile('public/index.html','text/html')
+    getStaticFile('../index.html','text/html')
     return
   }
 

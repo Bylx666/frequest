@@ -5,11 +5,11 @@
   "main": "frequest.js",
   "exports": {
     ".": "./frequest.js",
-    "./server": "./index.js"
+    "./server": "./api/index.js"
   },
   "scripts": {
     "test": "node test.js",
-    "server": "node index.js"
+    "server": "node ./api/index.js"
   },
   "repository": {
     "type": "git",
