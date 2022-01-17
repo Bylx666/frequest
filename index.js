@@ -6,8 +6,6 @@ const path = require('path')
 const port = process.env.PORT || 2333
 const host = process.env.HOSTNAME || "localhost"
 
-
-
 const app = http.createServer((Req,Res)=>{
 
   /**

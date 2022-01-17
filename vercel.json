@@ -1,9 +1,15 @@
 {
   "version": 2,
-  "builds": [
+  "function": {
+    "index.js": {
+      "runtime": "node@16.8.0",
+      "includeFiles": "public/*" 
+    }
+  },
+  "rewrites": [
     {
-      "src": "./index.js",
-      "use": "@vercel/node"
+      "source": "/(*)",
+      "destination": "/"
     }
   ]
 }
